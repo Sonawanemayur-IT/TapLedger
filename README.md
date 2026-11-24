@@ -1,146 +1,221 @@
-# TapLedger (Quick Expense)
+<div align="center">
 
-> **100% offline-first, privacy-focused Android expense tracker built around `< 3 second` expense capture.**  
-> Repository hosts documentation and packaged APK releases only. Download the latest Android APK from **[Releases](https://github.com/Sonawanemayur-IT/TapLedger/releases)**.
+<h1>TapLedger</h1>
 
----
+<p>
+  <strong>Private, 100% offline-first Android expense tracker built for &lt; 3 second capture.</strong><br />
+  Log daily spending with a double-press of your Volume button, track Cash vs. Digital splits, and understand every rupee.
+</p>
 
-## Highlights
+<p>
+  <a href="https://github.com/Sonawanemayur-IT/TapLedger/releases">
+    <img src="https://img.shields.io/badge/Download%20APK-Releases-E5A93C?style=for-the-badge&logo=android&logoColor=121110" alt="Download APK" />
+  </a>
+  <img src="https://img.shields.io/badge/Android-8.0%2B%20(API%2026%E2%80%9335)-1B1917?style=for-the-badge&logo=android&logoColor=E5A93C" alt="Android 8.0+" />
+  <img src="https://img.shields.io/badge/Network-100%25%20Offline-1B1917?style=for-the-badge" alt="100% Offline" />
+  <img src="https://img.shields.io/badge/Built%20With-Kotlin%20%C2%B7%20Compose%20%C2%B7%20Room-1B1917?style=for-the-badge&logo=kotlin&logoColor=E5A93C" alt="Kotlin Jetpack Compose Room" />
+</p>
 
-- **Instant `< 3s` Expense Capture** — Trigger quick entry from anywhere with a double-press of your Volume button, Quick Settings Tile, Persistent Notification, Home Screen shortcut, or the in-app `+` button.
-- **100% Offline & Private** — Zero `INTERNET` permission in `AndroidManifest.xml`, no accounts, no cloud sync, no ads, and no analytics SDKs. Every rupee stays on your device.
-- **Cash vs. Digital & Cash Wallet** — Track `Cash`, `UPI`, `Debit Card`, `Credit Card`, and `Other` separately, plus a dedicated Cash Wallet balance (`Starting Cash + Cash Additions − Cash Expenses`) that keeps ATM withdrawals and cash gifts separate from spending.
-- **Did You Know? Earning Targets** — Translates your last 30 calendar days of spending into understandable monthly, daily, working-day (`22 days/mo`), and hourly (`176 hours/mo`) take-home income estimates.
-- **Insights & Budget Alerts** — Daily / Weekly / Monthly charts, Month-to-Month same-day comparisons, Cash vs. Digital breakdown, highest spending days, local recurring-expense pattern suggestions, and `75% / 90% / 100%` monthly budget alerts.
-- **Smart Local Helpers** — Note-based category suggestions learned strictly from your own confirmed expenses, non-blocking 2-minute duplicate warnings, personalized evening check-in reminders respecting quiet hours, and full **CSV** export + **JSON** backup/restore.
+<p>
+  <a href="#why-tapledger">Overview</a> ·
+  <a href="#quick-capture-flow">Quick Capture</a> ·
+  <a href="#inside-the-app">5 Core Screens</a> ·
+  <a href="#cash-wallet--insights">Cash Wallet & Insights</a> ·
+  <a href="#privacy--permissions">Privacy</a> ·
+  <a href="#download--install">Download & Setup</a>
+</p>
 
----
-
-## Download & Install (Android 8.0+ / API 26+)
-
-> **App Drawer Name:** After installing, the app appears in your launcher as **Quick Expense** (package ID `com.quickexpense.app.debug` for debug builds / `com.quickexpense.app` for release builds, version `1.0.0`).
-
-1. Open the **[Releases](https://github.com/Sonawanemayur-IT/TapLedger/releases)** page and download the `.apk` asset from the latest release.
-2. Open the downloaded `.apk` on your Android phone and allow **Install unknown apps** for your browser or file manager if prompted.
-3. Launch **Quick Expense** from your app drawer.
-
-### Recommended Setup on OnePlus / OxygenOS 16 (and Android 13+)
-
-1. Allow **Notifications** when prompted so heads-up triggers, check-in reminders, and budget alerts work.
-2. Open **Settings → Volume Button Shortcut** inside the app to enable double-press **Volume Down** (or **Volume Up**) quick capture.
-3. Complete the built-in **OxygenOS 16 & Permission Setup** checklist:
-   - Enable **Banners** for the *Quick Expense Shortcut* notification channel.
-   - Enable **Quick Expense Volume Shortcut** in Android Accessibility settings (optional; single volume presses still pass through normally).
-   - Set **Battery Usage** to **Unrestricted / Allow background activity** so the OS does not suspend the volume shortcut listener.
-   - If you switch Trigger Experience from *Heads-Up Banner* to *Overlay Panel*, grant **Display over other apps**.
-4. *(No Accessibility option)* You can still trigger quick entry anytime via the **Quick Settings Tile** (`Quick Expense`), **Persistent Quick-Add Notification**, or the pinned **Quick Add** home screen shortcut.
+</div>
 
 ---
 
-## Core Features in Detail
+> [!IMPORTANT]
+> **Launcher Name & Distribution**  
+> - **App Drawer Name:** After installing the APK, look for **Quick Expense** in your Android launcher (`com.quickexpense.app.debug` / `com.quickexpense.app`, version `1.0.0`).  
+> - **Public Distribution:** This repository contains documentation and packaged Android APK releases only; application source code is not published here.
 
-### 1. Instant Quick-Entry Triggers
+---
 
-| Trigger | How It Works | Requires Accessibility? |
+## Why TapLedger?
+
+Most expenses aren't lost to big purchases — they vanish in ₹20 chai, ₹60 auto rides, and quick UPI scans that never make it into a tracker. **TapLedger** eliminates logging friction so capturing an expense takes **under 3 seconds**, while giving you deep offline analytics without ever requesting internet access.
+
+| Pillar | What You Get |
+| :--- | :--- |
+| **Zero-Friction Capture** | Double-press **Volume Down / Up**, type right inside a heads-up notification (`50 tea`), tap the **Quick Settings Tile**, use the **Persistent Shade Indicator**, or open from a pinned **Home Shortcut**. |
+| **100% Offline Privacy** | `android.permission.INTERNET` is completely omitted from `AndroidManifest.xml`. No accounts, no cloud servers, no ads, no analytics SDKs. |
+| **Cash + Digital Clarity** | Separates **Cash**, **UPI**, **Debit Card**, **Credit Card**, and **Other**, paired with a dedicated **Cash Wallet** so ATM withdrawals and cash gifts never inflate spending totals. |
+| **Actionable Financial Lens** | Includes a **Did You Know?** tab that translates your trailing 30-day spending pace into monthly, daily, working-day, and hourly take-home income targets. |
+| **Warm Graphite + Soft Amber UI** | Crafted in Material 3 & Jetpack Compose with tabular numerals (`tnum`), crisp `1 dp` hairline cards, spring-physics animations, and **Light / Dark / System** themes. |
+
+---
+
+## Quick Capture Flow
+
+```mermaid
+flowchart LR
+    T1["Volume Double-Press (Down / Up)"] --> M{"Trigger Mode"}
+    T2["Quick Settings Tile"] --> P["QuickEntryPopupCard (Auto-Focused Keypad)"]
+    T3["Persistent Shade / Home Shortcut"] --> P
+    M -->|"Default: Heads-Up Banner"| N["Heads-Up Banner + Inline Quick Log"]
+    N -->|"Tap Banner"| P
+    N -->|"Reply: 50 tea"| DB["Local Room SQLite (v5)"]
+    M -->|"Optional: Overlay Mode"| P
+    P -->|"Amount + Category + Mode + Note"| DB
+    DB --> U["2.8s Confirmation + 1-Tap Undo"]
+```
+
+### Capture Features Built for Speed
+
+- **Auto-Focused Numeric Pad:** Opens directly to the amount field (`80 ms` focus request) with live Indian numbering grouping (`1,00,000.5` for `INR`, standard 3-digit grouping for other currencies).
+- **Smart Pre-Selection:** Remembers your `lastUsedCategoryId` and `lastUsedPaymentMode`, surfaces your top 8 categories by usage frequency & recency, and expands to all active categories on tap.
+- **Note-Matched Suggestions:** Typing a note (`>= 2` characters) locally matches your own past confirmed expenses to suggest the right category — zero hardcoded guesses or cloud AI.
+- **Non-Blocking Safety Guardrails:**
+  - **2-Minute Duplicate Warning:** Alerts gently if an identical `(amount, category, payment mode)` entry was logged within the last 120 seconds, without blocking save.
+  - **Negative Cash Warning:** Flags when a `Cash` entry will take your Cash Wallet balance below zero.
+- **Instant Undo:** Every saved entry (via popup, notification inline reply, or Ledger delete) supports immediate one-tap **Undo**.
+
+---
+
+## Inside the App
+
+TapLedger organizes everything into five focused bottom-navigation tabs plus dedicated Category Management:
+
+### 1. Overview (`Home`)
+- **Shortcut Status Pill:** Live `Shortcut Ready` / `Setup Shortcut` chip linking directly to permission configuration.
+- **Today's Spending Hero Card:** Animated tabular total (`TODAY'S SPENDING`), entry counter, **Quick** button, and **THIS WEEK / THIS MONTH** split.
+- **Cash Wallet Card:** Displays live cash-in-hand, total cash added, and cash spent since your as-of date, with **Add Cash**, **Cash Ledger**, and **Starting Cash** actions.
+- **Legacy Mode Cleanup:** Detects any entries with `Unspecified` payment mode and offers a one-tap **Bulk Assign** dialog.
+- **Monthly Budget Progress:** Color-adaptive progress bar (accent `< 75%`, warning `75%–99%`, danger `>= 100%`).
+- **14-Day Trend & Top Categories:** Compact 14-day bar chart highlighting today and peak day, top 5 categories with percentage shares, and recent expenses tagged by capture source (`Volume`, `Notification`, `Tile`, `Shortcut`).
+
+### 2. Ledger (`History`)
+- **Live Search:** Search simultaneously across notes, category names, and payment mode labels.
+- **Multi-Axis Filter Chips:** Combine **Date** (`All`, `Today`, `This Week`, `This Month`), **Category**, and **Payment Mode** (`Cash`, `UPI`, `Debit Card`, `Credit Card`, `Other`, `Unspecified`).
+- **Sort Cycling:** Toggle between **Newest**, **Oldest**, and **Highest** amount.
+- **Date-Grouped Feed:** Clean `TODAY` / `YESTERDAY` / date section headers with daily totals, tap-to-edit modal (`EditExpenseDialog`), and one-tap delete with **Undo**.
+
+### 3. Did You Know? (`Earning Targets`)
+Turns your last **30 local calendar days** of expenses (excluding Cash Additions) into tangible take-home income targets using exact `BigDecimal` `HALF_UP` rounding:
+
+| Metric | Formula | Purpose |
 | :--- | :--- | :--- |
-| **Volume Double-Press** | Double-press **Volume Down** or **Volume Up** within a configurable `250 ms – 700 ms` window (`850 ms` cooldown guard, optional haptic pulse). Single presses change media/ring volume normally. | Yes (`canRetrieveWindowContent="false"`) |
-| **Heads-Up Banner + Inline Log** | Default trigger experience: posts a high-priority heads-up banner with **Open Quick Panel** and **Quick Log** inline notification reply (type `50` or `50 tea` right inside the notification), plus confirmation with **Undo**. | Notification permission only |
-| **Floating Overlay Panel** | Optional direct floating panel (`QuickEntryOverlayService`) displayed over any app. | Requires *Display over other apps* |
-| **Quick Settings Tile** | Pull down Android Quick Settings and tap **Quick Expense**. | No |
-| **Persistent Indicator** | Ongoing low-priority notification displaying today's spend and a 1-tap Quick Entry button. | No |
-| **Home Screen Shortcut** | Long-press the app icon → **Quick Add** (`Log Quick Expense`). | No |
+| **Monthly Target** | Net 30-day spend | Estimated monthly take-home needed to sustain your pace |
+| **Daily Target** | `Monthly Target ÷ 30` | Average daily calendar spend |
+| **Working-Day Target** | `Monthly Target ÷ 22` | Equivalent earnings per working day (`22 days/mo`) |
+| **Hourly Target** | `Monthly Target ÷ 176` | Equivalent take-home rate (`22 days × 8 hrs/day`) |
 
-### 2. Fast Numeric Popup (`QuickEntryPopupCard`)
+Includes **Preliminary Estimate** notices when history has fewer than 30 days or fewer than 5 entries, plus expandable step-by-step calculations.
 
-- **Auto-Focused Decimal Input**: Numeric keypad opens immediately (~80 ms) with live digit grouping (`1,00,000.5` Indian 3-2-2 grouping for `INR`, 3-digit grouping for other currencies).
-- **One-Tap Categories**: Top 8 categories sorted by usage frequency and recency (expandable to all active categories), pre-selecting your `lastUsedCategoryId`.
-- **Local Note Suggestions**: Typing a note (minimum 2 characters) suggests a matching category strictly from your own previously confirmed expenses with notes.
-- **Payment Modes**: Choose `Cash`, `UPI`, `Debit Card`, `Credit Card`, or `Other` (remembers `lastUsedPaymentMode`, defaulting to `Cash`).
-- **Non-Blocking Safety Checks**:
-  - Alerts if a matching `(amount, category, payment mode)` entry was logged within the last **2 minutes** (never blocks saving).
-  - Warns if a `Cash` expense will push your Cash Wallet balance below zero.
-- **Instant Undo**: Confirmation banner counts down for `2.8 seconds` with a one-tap **Undo** button that deletes the entry and restores focus.
+### 4. Insights (`Analytics`)
+- **Key Metrics & MoM Comparison:** `Avg. Daily (MTD)`, `Top Category`, and same-day-range **Month-to-Month** comparison (`Days 1–N` this month vs. `1–N` last month).
+- **Cash vs. Digital Split:** Stacked visual bar comparing **Cash** vs. **Digital** (`UPI` + `Debit Card` + `Credit Card`), keeping `Other` and `Unspecified` separate.
+- **Payment Modes Breakdown:** Transaction count, total spend, and share percentage per mode.
+- **Interactive Charts:** Switch seamlessly between **Daily** (`14 days`), **Weekly** (`6 weeks`), and **Monthly** (`6 months`) views with period total and peak highlights.
+- **Budgeting & Recurring Detection:** Set overall monthly + per-category budgets (`75% / 90% / 100%` alerts), view **Highest Spending Days**, and review read-only **Recurring Expense Suggestions** (`>= 3` consistent Weekly, Biweekly, or Monthly entries sharing a category and note).
 
-### 3. Five Main Screens
-
-1. **Overview (`Home`)**
-   - Live **Shortcut Ready / Setup Shortcut** indicator chip linking directly to Settings.
-   - **Today's Spending** hero card (tabular numerals `tnum`, entry count, **Quick** button) alongside **This Week** and **This Month** totals.
-   - **Cash Wallet** summary card with **Set Starting Cash**, **Add Cash**, and **Cash Ledger** controls.
-   - Unspecified payment-mode cleanup prompt with bulk assignment dialog (`Cash`, `UPI`, `Debit Card`, `Credit Card`, `Other`).
-   - **Monthly Budget** progress bar (switches smoothly between accent, warning at `>= 75%`, and danger at `>= 100%`).
-   - **14-Day Spending Trend** bar chart highlighting today and peak day.
-   - **Category Breakdown** (top 5 for the current month) and **Recent Expenses** with source badges (`Volume`, `Notification`, `Tile`, `Shortcut`) and tap-to-edit.
-
-2. **Ledger (`History`)**
-   - Full-text search across notes, category names, and payment mode labels.
-   - Multi-axis filter chips: **Date** (`All`, `Today`, `This Week`, `This Month`), **Category**, and **Payment Mode**.
-   - Sort cycling (**Newest**, **Oldest**, **Highest**).
-   - Sticky-style date headers (`TODAY`, `YESTERDAY`, formatted dates) with daily totals, tap-to-edit dialog, and delete with Snackbar **Undo**.
-
-3. **Did You Know? (`Earning Targets`)**
-   - Consumes the trailing **30 calendar days** of recorded expenses in your local timezone (excluding Cash Additions by design).
-   - Computes four transparent take-home earning equivalents using standard `HALF_UP` `BigDecimal` arithmetic:
-     - **Monthly Target** (trailing 30-day net spend)
-     - **Daily Target** (`Monthly Target ÷ 30 calendar days`)
-     - **Working-Day Target** (`Monthly Target ÷ 22 working days/month`)
-     - **Hourly Target** (`Monthly Target ÷ 176 working hours/month`, assuming `22 days × 8 hours/day`)
-   - Shows **Preliminary Estimate** notices when history spans under 30 days or fewer than 5 entries, plus expandable calculation breakdowns.
-
-4. **Insights (`Analytics`)**
-   - **Avg. Daily (MTD)** and **Top Category** summary cards.
-   - **Month-to-Month Same-Day Range Comparison** (compares days `1..N` of the current month against `1..N` of the previous month).
-   - **Cash vs. Digital Split** (`Cash` vs. `UPI + Debit Card + Credit Card`, keeping `Other` and `Unspecified` separate).
-   - **Payment Modes Breakdown** with per-mode counts, totals, and percentages.
-   - Interactive **Daily (14d) / Weekly (6w) / Monthly (6m)** bar chart with period total and peak callout.
-   - **Monthly Budget** editor with configurable `75%`, `90%`, and `100%` notification alerts.
-   - **Highest Spending Days**, **Category Breakdown** (with per-category budget progress bars), and read-only **Recurring Expense Suggestions** (detects `>= 3` consistent Weekly, Biweekly, or Monthly entries sharing a category and note).
-
-5. **Settings & Category Management**
-   - **14 Pre-Seeded Categories** (`Food & Dining`, `Groceries`, `Transportation`, `Shopping`, `Stationery`, `Education`, `Entertainment`, `Health`, `Bills & Utilities`, `Rent`, `Travel`, `Personal Care`, `Subscriptions`, `Other`) with full create, edit, reorder, archive/restore, icon picker (`15` icons), `10`-color palette, and optional per-category monthly limits.
-   - **Gentle Daily Check-In Reminders**: Scheduled via `WorkManager` in your configured evening window (default `7:30 PM – 9:30 PM`), skipping quiet hours (default `10:30 PM – 7:00 AM`), rotating check-in prompts, supporting **Snooze** (`30 min` default) and **Dismiss**, rescheduling automatically on device boot/timezone change, and personalizing reminder timing locally once `>= 7` timing signals exist.
-   - **End-of-Day & Weekly Summaries**: Optional `9:00 PM` daily summary and weekly recap notifications.
-   - **Themes & Currencies**: **System**, **Light**, and **Dark** themes in the **Warm Graphite + Soft Amber** visual identity (`#121110` / `#E5A93C` dark, `#F5F3EE` / `#B4690E` light); supports `INR ₹` (default, `Asia/Kolkata`), `USD $`, `EUR €`, and `GBP £`.
-   - **Backup & Export (`BackupCodec` v2)**:
-     - **CSV** export & share (`EXPENSE`, `CASH_STARTING`, and `CASH_ADDITION` rows).
-     - **JSON** backup & restore for categories, expenses, budgets, settings, cash wallet configuration, and cash additions with UID-based duplicate skipping.
+### 5. Settings & Category Management
+- **Category Manager:** 14 pre-seeded categories (`Food & Dining`, `Groceries`, `Transportation`, `Shopping`, `Stationery`, `Education`, `Entertainment`, `Health`, `Bills & Utilities`, `Rent`, `Travel`, `Personal Care`, `Subscriptions`, `Other`), unlimited custom categories, `15` vector icons, `10` accent colors, up/down custom ordering, per-category monthly limits, and archive/restore support.
+- **Gentle Personalized Evening Check-In:** `WorkManager`-backed daily reminder inside a configurable window (default `7:30 PM – 9:30 PM`), respecting quiet hours (default `10:30 PM – 7:00 AM`), rotating friendly messages, skipping if already logged, offering **Snooze** (`30 min`) / **Dismiss**, and adapting locally after `>= 7` timing signals.
+- **Summaries & Alerts:** Optional `9:00 PM` End-of-Day summary, Weekly recap, and Monthly Budget threshold notifications.
+- **Appearance & Currency:** `System`, `Light`, and `Dark` themes; supports `INR ₹` (`Asia/Kolkata` default), `USD $`, `EUR €`, and `GBP £`.
+- **CSV & JSON Portability (`BackupCodec` v2):** Export/Share CSV (`EXPENSE`, `CASH_STARTING`, `CASH_ADDITION` rows) and full JSON backup/restore with UID deduplication.
 
 ---
 
-## Cash Wallet Mechanics
+## Cash Wallet & Insights
 
-The Cash Wallet computes cash-in-hand purely from persisted records rather than mutable running counters:
+Cash-in-hand is always derived dynamically from database records rather than mutable counters:
 
 ```text
 Cash Balance = Starting Cash
              + SUM(Cash Additions dated >= As-Of Date)
-             − SUM(Cash Expenses dated >= As-Of Date)
+             − SUM(Expenses where PaymentMode == CASH and dated >= As-Of Date)
 ```
 
-- Cash additions support **ATM withdrawal**, **Gift**, and **Other** sources with optional notes and never appear in expense charts or `Did You Know?` totals.
-- Non-cash modes (`UPI`, `Debit Card`, `Credit Card`, `Other`, `Unspecified`) never alter your Cash Wallet balance.
+- **Cash Additions** (**ATM withdrawal**, **Gift**, **Other**) replenish your wallet without distorting spending charts or `Did You Know?` calculations.
+- **Digital Modes** (`UPI`, `Debit Card`, `Credit Card`) and `Other` never deduct from your Cash Wallet balance.
+
+---
+
+## Design Identity
+
+TapLedger uses a calm, high-contrast **Warm Graphite + Soft Amber** palette engineered for AMOLED readability:
+
+| Token | Light Theme | Dark Theme | Role |
+| :--- | :--- | :--- | :--- |
+| `canvas` | `#F5F3EE` | `#121110` | App root background |
+| `surfacePrimary` | `#FCFBF8` | `#1B1917` | Cards, quick-entry panel, bottom bar |
+| `surfaceSecondary` | `#ECE8DF` | `#25221F` | Inset inputs, chips, chart tracks |
+| `hairline` | `#DFDAD0` | `#332F2B` | `1 dp` borders & dividers |
+| `inkPrimary` | `#1C1A17` | `#F5F2EC` | Headings, monetary totals |
+| `accent` | `#B4690E` | `#E5A93C` | Primary CTAs, active indicators, trends |
 
 ---
 
 ## Privacy & Permissions
 
+> [!NOTE]
+> TapLedger declares **zero network permissions** (`INTERNET` is intentionally excluded from `AndroidManifest.xml`), sets `android:allowBackup="false"`, and keeps all data in local Room SQLite (`quick_expense.db`).
+
+<details>
+<summary><strong>View Full Android Permissions Breakdown</strong></summary>
+
+<br />
+
 | Permission | Purpose | Required? |
 | :--- | :--- | :--- |
-| `INTERNET` | **Intentionally omitted** — zero network access. | Never requested |
-| `POST_NOTIFICATIONS` | Heads-up quick triggers, daily check-ins, summaries, and budget alerts. | Optional (recommended) |
-| `BIND_ACCESSIBILITY_SERVICE` | Detects volume button double-presses when enabled; sets `canRetrieveWindowContent="false"` and never reads screen content. | Optional |
-| `SYSTEM_ALERT_WINDOW` + `FOREGROUND_SERVICE_SPECIAL_USE` | Direct floating popup overlay mode and persistent quick-add shade indicator. | Optional |
-| `RECEIVE_BOOT_COMPLETED` | Restores scheduled WorkManager reminders and summaries after reboot or app updates. | Automatic |
-| `REQUEST_IGNORE_BATTERY_OPTIMIZATIONS` | Shortcut for OnePlus / OxygenOS users to set battery usage to Unrestricted. | Optional |
-| `VIBRATE` | Subtle haptic feedback on double-press and expense save. | Automatic |
+| `INTERNET` | **Omitted** — impossible for the app to transmit data over a network. | Never |
+| `POST_NOTIFICATIONS` | Heads-up shortcut banners, inline quick log, evening check-ins, and budget alerts. | Optional (Recommended) |
+| `BIND_ACCESSIBILITY_SERVICE` | Listens solely for configured Volume key double-presses (`canRetrieveWindowContent="false"`, single presses pass through normally). | Optional |
+| `SYSTEM_ALERT_WINDOW` | Only needed if switching Trigger Experience from *Heads-Up Banner* to *Overlay Panel*. | Optional |
+| `FOREGROUND_SERVICE` / `SPECIAL_USE` | Direct overlay service and persistent quick-add shade notification. | Optional |
+| `RECEIVE_BOOT_COMPLETED` | Reschedules WorkManager check-in and summary notifications after device reboot. | Automatic |
+| `REQUEST_IGNORE_BATTERY_OPTIMIZATIONS` | Direct shortcut for OxygenOS users to allow unrestricted background execution. | Optional |
+| `VIBRATE` | Haptic pulse on double-press detection and expense save. | Automatic |
 
-- Local storage uses Room SQLite (`quick_expense.db`, schema v5) with `android:allowBackup="false"`.
+</details>
 
 ---
 
-## Technical Specifications
+## Download & Install
 
-- **Platform:** Native Android (`minSdk 26`, `compileSdk 35`, `targetSdk 35`)
-- **Language & UI:** Kotlin `2.0.21`, Jetpack Compose (BOM `2024.11.00`), Material 3, Material Icons Extended
-- **Persistence & Background Work:** Room `2.6.1` (KSP), WorkManager `2.10.0`, Kotlin Coroutines `1.9.0`
-- **Build Info:** AGP `8.7.3`, Gradle `8.10.2`, Java 17 bytecode, Version `1.0.0` (`versionCode = 1`)
+1. Visit the **[Releases](https://github.com/Sonawanemayur-IT/TapLedger/releases)** page and download the `.apk` file (`Android 8.0 / API 26+` required, tested up to `Android 15 / targetSdk 35`).
+2. Tap the `.apk` on your device and enable **Install unknown apps** for your browser/files app if asked.
+3. Open **Quick Expense** from your app drawer.
+
+<details>
+<summary><strong>OnePlus / OxygenOS 16 Recommended Setup Checklist</strong></summary>
+
+<br />
+
+TapLedger includes a live status checklist under **Settings → OxygenOS 16 & Permission Setup** with one-tap deep links:
+
+1. **Notification Permission** → Allow notifications so heads-up banners and alerts appear cleanly.
+2. **Heads-Up Banner Channel** → Ensure **Banners** are enabled for the *Quick Expense Shortcut* channel (`IMPORTANCE_HIGH`).
+3. **Volume Accessibility Service** → *(Optional)* Enable *Quick Expense Volume Shortcut* so double-pressing Volume Down/Up works over any app.
+4. **Battery Optimization** → Set Battery Usage to **Unrestricted / Allow background activity** so OxygenOS does not pause the background shortcut service.
+5. **Display Over Other Apps** → *(Only if using Overlay Panel mode instead of Heads-Up Banner)*.
+
+> No Accessibility? You can always log in `< 3s` using the **Quick Settings Tile**, **Persistent Quick-Add Notification**, or **Home Screen Shortcut**.
+
+</details>
+
+<details>
+<summary><strong>Technical Stack & Build Specs</strong></summary>
+
+<br />
+
+- **Language & UI:** Kotlin `2.0.21` · Jetpack Compose (BOM `2024.11.00`) · Material 3 · Material Icons Extended
+- **Persistence & Workers:** Room `2.6.1` (KSP, Schema v5, Migrations `1→2→3→4→5`) · WorkManager `2.10.0` · Kotlin Coroutines `1.9.0`
+- **Backup Format:** CSV export (`EXPENSE`, `CASH_STARTING`, `CASH_ADDITION`) & JSON Schema v2 (`categories`, `expenses`, `budgets`, `settings`, `cashWalletConfig`, `cashAdditions`)
+- **Android SDK:** `minSdk 26` · `compileSdk 35` · `targetSdk 35` · Java 17 bytecode
+- **Tooling:** AGP `8.7.3` · Gradle `8.10.2` · Version `1.0.0` (`versionCode = 1`)
+
+</details>
+
+---
+
+<div align="center">
+  <sub>Built by <a href="https://github.com/Sonawanemayur-IT">Mayur Sonawane (@Sonawanemayur-IT)</a> · TapLedger v1.0.0</sub>
+</div>
